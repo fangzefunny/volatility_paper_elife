@@ -301,6 +301,25 @@ def main():
             ]
             B_max = 10
 
+        if args.modelname=='ym1':
+            # Model resource-rational 
+            import models_ym1 as model_specific
+            params=[
+            # both
+            'lr_baseline','lr_goodbad','lr_stabvol','lr_goodbad_stabvol',
+            'lr_c_baseline', 'lr_c_goodbad','lr_c_stabvol','lr_c_goodbad_stabvol',
+            'Binv_baseline','Binv_goodbad','Binv_stabvol','Binv_goodbad_stabvol',
+            'Bc_baseline',
+            'mag_baseline',
+            # reward - pain
+            'lr_rewpain','lr_rewpain_goodbad','lr_rewpain_stabvol','lr_rewpain_goodbad_stabvol',
+            'lr_c_rewpain','lr_c_rewpain_goodbad','lr_c_rewpain_stabvol','lr_c_rewpain_goodbad_stabvol',
+            'Binv_rewpain','Binv_rewpain_goodbad','Binv_rewpain_stabvol',
+            'Bc_rewpain',
+            'mag_rewpain'
+            ]
+            B_max = 10
+
 
     # load data
     if args.exp==1:
