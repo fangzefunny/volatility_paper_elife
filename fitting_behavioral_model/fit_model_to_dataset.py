@@ -64,7 +64,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', type=int, default=4)
-    parser.add_argument('--modelname', '-m', type=str, default=None)
+    parser.add_argument('--modelname', '-m', type=str, default='ym1')
     parser.add_argument('--steps', '-st', type=int, default=1000)
     parser.add_argument('--steps_tune', '-stt', type=int, default=100)
     parser.add_argument('--covariate', '-c', type=str, default='None')
@@ -320,6 +320,10 @@ def main():
             ]
             B_max = 10
 
+        ####################################filll####################################
+
+
+        #############################################################################
 
     # load data
     if args.exp==1:

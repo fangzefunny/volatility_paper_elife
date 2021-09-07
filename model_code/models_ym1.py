@@ -17,6 +17,7 @@ from theano.ifelse import ifelse
 
 trng = T.shared_randomstreams.RandomStreams(1234)
 
+eps_ = 1e-10
 
 import numpy as np
 import pickle
@@ -134,13 +135,16 @@ def trial_step(
 
     ################################### filll ####################################
 
-    # π1 = π(c=1|s=1) = qt*exp(βM1) / [qt*exp(βM1) + qt]  
-    pi1_s1_t = choice_kernel_tm1 * T.exp( Binv_t * mag_1_t) / \
-          ( choice_kernel_tm1 * T.exp( Binv_t * mag_1_t) + 1 - choice_kernel_tm1) 
+    # π1 = π(c=1|s=1) = qt*exp(βM1) / [qt*exp(βM1) + qt] 
+    log_pi1_s1_t = Binv_t * mag_1_t + T.log( choice_kernel_tm1 + eps_) 
+    logsumexp_pi1_s1 = T.log( T.exp(log_pi1_s1_t) + 1 - choice_kernel_tm1 + eps_)
+    pi1_s1_t = T.exp( log_pi1_s1_t - logsumexp_pi1_s1)
 
     # π2 = π(c=1|s=0) = qt / [qt + (1-qt)*exp(βM0)] 
-    pi1_s0_t = choice_kernel_tm1 / \
-        ( choice_kernel_tm1 + (1 - choice_kernel_tm1) * T.exp( Binv_t * mag_0_t))  
+    log_pi1_s0_t = T.log( choice_kernel_tm1 + eps_)
+    logsumexp_pi1_s0 = T.log( choice_kernel_tm1 + \
+                      (1 - choice_kernel_tm1) * T.exp( Binv_t * mag_0_t) + eps_)
+    pi1_s0_t = T.exp( log_pi1_s0_t - logsumexp_pi1_s0)
 
     # p(C=1) = ptπ1 + π2 - ptπ2 
     prob_choice_t = estimate_tm1 * pi1_s1_t - pi1_s0_t - estimate_tm1 * pi1_s0_t
