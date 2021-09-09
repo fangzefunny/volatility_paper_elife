@@ -155,8 +155,8 @@ def plot_param_posterior_errorbars_onesubplot(
 
         # error bar for group mean and HDI's # add extra dot, why?
         #plt.scatter(pii+offset,mu,color=color,s=s_bar)
-        plt.errorbar(pii+offset,mu,yerr=np.array([[mu-lower2p5],
-                                                  [upper97p5-mu]]),
+        plt.errorbar(pii+offset,mu,yerr=np.array([mu-lower2p5,
+                                                  upper97p5-mu]),
                     color=color,label=legendlabeltmp,
                     marker='o',
                     markersize=s_bar,

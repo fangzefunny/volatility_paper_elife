@@ -518,13 +518,14 @@ def create_gen_choice_model(X,Y,param_names,B_max=10.0,seed=1,nonlinear_indicato
     rng_val.seed(seed)
     shared_random_stream.set_value(rng_val,borrow=True)
 
-    f = theano.function([Theta],
-    [choice,outcome_valence,
+    roi_vars = [choice,outcome_valence,
     prob_choice,choice_val,
     estimate_r,choice_kernel,lr,lr_c,Gamma,Binv,Bc,mdiff,eps,
     ############ filll #############
     pi1_s1, pi1_s0,        
     ################################ 
-    ],updates=updates)#no_default_updates=True)
+    ]
+
+    f = theano.function([Theta],roi_vars,updates=updates)#no_default_updates=True)
 
     return(f)
