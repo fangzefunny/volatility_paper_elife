@@ -321,7 +321,22 @@ def main():
             B_max = 10
 
         ####################################filll####################################
-
+        if args.modelname=='eta2':
+            # Model 1 #
+            import models_eta2 as model_specific
+            params=['lr_baseline','lr_goodbad','lr_stabvol','lr_goodbad_stabvol',
+                'lr_c_baseline',
+             'Amix_baseline','Amix_goodbad','Amix_stabvol','Amix_goodbad_stabvol',
+             'Binv_baseline','Binv_goodbad','Binv_stabvol','Binv_goodbad_stabvol',
+             'Bc_baseline',
+            'mag_baseline',
+             'lr_rewpain','lr_rewpain_goodbad','lr_rewpain_stabvol',
+            'Amix_rewpain','Amix_rewpain_goodbad','Amix_rewpain_stabvol',
+            'Binv_rewpain','Binv_rewpain_goodbad','Binv_rewpain_stabvol',
+            'Bc_rewpain',
+            'mag_rewpain'
+            ]
+            B_max = 10
 
         #############################################################################
 
